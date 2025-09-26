@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReUse AI - Turn Waste into Wonder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo" onclick="navigateToPage('home')">
+                    <i class="fas fa-leaf"></i>
+                    <span>ReUse AI</span>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#home" class="nav-link active" onclick="navigateToPage('home'); return false;">Home</a>
+                    <a href="#community" class="nav-link" onclick="navigateToPage('community'); return false;">Community</a>
+                    <a href="#tutorials" class="nav-link" onclick="navigateToPage('tutorials'); return false;">Tutorials</a>
+                    <a href="#about" class="nav-link" onclick="navigateToPage('about'); return false;">About</a>
+                    <a href="#profile" class="nav-link" onclick="navigateToPage('profile'); return false;">Profile</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn btn--primary btn--sm">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <main id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Turn Waste into Wonder with ReUse AI</h1>
+                    <p class="hero-subtitle">Upload any item and instantly receive creative reuse ideas, DIY tutorials, and environmental impact insights powered by YouTube video guides</p>
+                    <div class="hero-actions">
+                        <button class="btn btn--primary btn--lg" onclick="navigateToPage('upload')">
+                            <i class="fas fa-upload"></i> Upload Image
+                        </button>
+                        <button class="btn btn--secondary btn--lg" onclick="navigateToPage('upload')">
+                            <i class="fas fa-camera"></i> Snap Picture
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="10847">0</div>
+                            <div class="stat-label">Items Reused</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="5420">0</div>
+                            <div class="stat-label">Kg Waste Saved</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="2156">0</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="847">0</div>
+                            <div class="stat-label">Video Tutorials</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects with Video Integration -->
+        <section class="featured-projects">
+            <div class="container">
+                <h2>Featured Community Projects</h2>
+                <p class="section-subtitle">Watch how others transform waste into wonderful creations</p>
+                <div class="projects-grid" id="featuredProjects">
+                    <!-- Projects will be loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Upload/Analysis Section -->
+    <section id="upload" class="page">
+        <div class="container">
+            <div class="upload-container">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Upload Your Item</h3>
+                        <p>Drag and drop an image or click to select and get instant YouTube video tutorials</p>
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <button class="btn btn--primary">Choose File</button>
+                    </div>
+                </div>
+                <div class="sample-items">
+                    <h4>Or try these sample items:</h4>
+                    <div class="sample-grid">
+                        <div class="sample-item" data-item="plastic-bottle" onclick="processSampleItem('plastic-bottle')">
+                            <div class="sample-icon">🍶</div>
+                            <span>Plastic Bottle</span>
+                            <div class="sample-video-count">4 video tutorials</div>
+                        </div>
+                        <div class="sample-item" data-item="cardboard-box" onclick="processSampleItem('cardboard-box')">
+                            <div class="sample-icon">📦</div>
+                            <span>Cardboard Box</span>
+                            <div class="sample-video-count">3 video tutorials</div>
+                        </div>
+                        <div class="sample-item" data-item="glass-jar" onclick="processSampleItem('glass-jar')">
+                            <div class="sample-icon">🫙</div>
+                            <span>Glass Jar</span>
+                            <div class="sample-video-count">2 video tutorials</div>
+                        </div>
+                        <div class="sample-item" data-item="old-tire" onclick="processSampleItem('old-tire')">
+                            <div class="sample-icon">🛞</div>
+                            <span>Old Tire</span>
+                            <div class="sample-video-count">5 video tutorials</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Loading -->
+    <section id="analysis" class="page">
+        <div class="container">
+            <div class="analysis-container">
+                <div class="loading-animation">
+                    <div class="progress-ring">
+                        <div class="progress-circle"></div>
+                        <div class="progress-text">0%</div>
+                    </div>
+                    <h3>Analyzing Your Item...</h3>
+                    <div class="analysis-steps">
+                        <div class="step active">
+                            <i class="fas fa-eye"></i>
+                            <span>Detecting object</span>
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-brain"></i>
+                            <span>Processing with AI</span>
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-video"></i>
+                            <span>Finding YouTube tutorials</span>
+                        </div>
+                        <div class="step">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Generating ideas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Page with Enhanced Video Integration -->
+    <section id="results" class="page">
+        <div class="container">
+            <div class="results-header">
+                <div class="detected-item">
+                    <h2>Detected Item: <span id="detectedItemName">Plastic Bottle</span></h2>
+                    <p>Material: <span id="detectedMaterial">PET Plastic</span></p>
+                </div>
+                <div class="environmental-impact">
+                    <div class="impact-metric">
+                        <i class="fas fa-leaf"></i>
+                        <div>
+                            <span class="impact-value" id="wasteReduced">1.2</span>
+                            <span class="impact-unit">kg waste saved</span>
+                        </div>
+                    </div>
+                    <div class="video-summary">
+                        <i class="fas fa-play-circle"></i>
+                        <div>
+                            <span class="video-count">6</span>
+                            <span class="video-label">video tutorials found</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-content">
+                <aside class="filters-sidebar">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <h4>Difficulty</h4>
+                        <label><input type="checkbox" value="Easy" checked> Easy</label>
+                        <label><input type="checkbox" value="Medium" checked> Medium</label>
+                        <label><input type="checkbox" value="Hard" checked> Hard</label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Time Required</h4>
+                        <label><input type="checkbox" value="< 1hr" checked> < 1 hour</label>
+                        <label><input type="checkbox" value="1-3hrs" checked> 1-3 hours</label>
+                        <label><input type="checkbox" value="3+ hrs" checked> 3+ hours</label>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Video Features</h4>
+                        <label><input type="checkbox" value="hd" checked> HD Quality</label>
+                        <label><input type="checkbox" value="subtitles" checked> Has Subtitles</label>
+                        <label><input type="checkbox" value="beginner" checked> Beginner Friendly</label>
+                    </div>
+                </aside>
+                
+                <main class="ideas-grid" id="reuseIdeas">
+                    <!-- Ideas with YouTube videos will be populated by JavaScript -->
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Page with Video Support -->
+    <section id="community" class="page">
+        <div class="container">
+            <div class="community-header">
+                <h2>Community Projects</h2>
+                <div class="community-filters">
+                    <button class="filter-btn active" data-filter="recent">Recent</button>
+                    <button class="filter-btn" data-filter="popular">Popular</button>
+                    <button class="filter-btn" data-filter="trending">Trending</button>
+                    <button class="filter-btn" data-filter="video">With Videos</button>
+                </div>
+            </div>
+            
+            <div class="community-content">
+                <div class="projects-main">
+                    <div class="community-grid" id="communityProjects">
+                        <!-- Projects will be loaded by JavaScript -->
+                    </div>
+                </div>
+                
+                <aside class="leaderboard">
+                    <h3>Top Contributors</h3>
+                    <div class="leaderboard-list" id="leaderboardList">
+                        <!-- Leaderboard will be populated by JavaScript -->
+                    </div>
+                    
+                    <div class="video-leaderboard">
+                        <h4>Most Watched Videos</h4>
+                        <div class="video-stats-mini">
+                            <div class="mini-stat">
+                                <span class="mini-value">15.2K</span>
+                                <span class="mini-label">Bottle Planters</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">23.1K</span>
+                                <span class="mini-label">Self-Watering</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">31.7K</span>
+                                <span class="mini-label">Bird Feeder</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Page with Enhanced Video Integration -->
+    <section id="tutorials" class="page">
+        <div class="container">
+            <div class="tutorials-header">
+                <h2>DIY Tutorials & Video Guides</h2>
+                <p class="section-subtitle">Learn from expert creators with step-by-step YouTube tutorials</p>
+            </div>
+            <div class="tutorials-categories">
+                <button class="category-btn active" data-category="all">All Tutorials</button>
+                <button class="category-btn" data-category="beginner">Beginner</button>
+                <button class="category-btn" data-category="intermediate">Intermediate</button>
+                <button class="category-btn" data-category="advanced">Advanced</button>
+            </div>
+            <div class="tutorials-grid" id="tutorialsGrid">
+                <!-- Tutorials will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-hero">
+                    <h2>Our Mission</h2>
+                    <p class="about-lead">Making eco-friendly living effortless and fun through AI-powered sustainability solutions and comprehensive video tutorials</p>
+                </div>
+                
+                <div class="mission-grid">
+                    <div class="mission-card">
+                        <i class="fas fa-recycle"></i>
+                        <h3>Reduce Waste</h3>
+                        <p>Help individuals and communities reduce waste by finding creative ways to reuse everyday items with video guidance</p>
+                    </div>
+                    <div class="mission-card">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Video Learning</h3>
+                        <p>Provide high-quality YouTube tutorials that make learning sustainable practices accessible and engaging</p>
+                    </div>
+                    <div class="mission-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Build Community</h3>
+                        <p>Connect like-minded individuals passionate about sustainability through shared video experiences</p>
+                    </div>
+                </div>
+                
+                <div class="impact-stats">
+                    <h3>Our Impact</h3>
+                    <div class="impact-grid">
+                        <div class="impact-item">
+                            <span class="impact-number">50,000+</span>
+                            <span class="impact-label">Items Reused</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-number">25 Tons</span>
+                            <span class="impact-label">Waste Diverted</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-number">15,000+</span>
+                            <span class="impact-label">Active Users</span>
+                        </div>
+                        <div class="impact-item">
+                            <span class="impact-number">847</span>
+                            <span class="impact-label">Video Tutorials</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Page with Video Analytics -->
+    <section id="profile" class="page">
+        <div class="container">
+            <div class="profile-header">
+                <div class="profile-info">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-details">
+                        <h2>Your Profile</h2>
+                        <p class="profile-level">Level: <span id="userLevel">Green Guru</span></p>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-circle">
+                        <div class="progress-ring">
+                            <div class="progress-circle" data-progress="75"></div>
+                            <div class="progress-content">
+                                <span class="progress-number" id="itemsReused">47</span>
+                                <span class="progress-label">Items</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-metrics">
+                        <div class="metric">
+                            <span class="metric-value" id="wasteScored">23.4</span>
+                            <span class="metric-label">kg Waste Saved</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value" id="userPoints">1,250</span>
+                            <span class="metric-label">Points Earned</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-content">
+                <div class="badges-section">
+                    <h3>Your Badges</h3>
+                    <div class="badges-grid" id="userBadges">
+                        <!-- Badges will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="achievements-section">
+                    <h3>Recent Projects</h3>
+                    <div class="user-projects" id="userProjects">
+                        <div class="project-item">
+                            <div class="project-icon">🍶</div>
+                            <div class="project-details">
+                                <h4>Plastic Bottle Planter</h4>
+                                <p>Completed 3 days ago</p>
+                            </div>
+                            <div class="project-points">+50 pts</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-icon">📦</div>
+                            <div class="project-details">
+                                <h4>Cardboard Organizer</h4>
+                                <p>Completed 1 week ago</p>
+                            </div>
+                            <div class="project-points">+75 pts</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video stats section will be added by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Detail Modal -->
+    <div class="modal hidden" id="projectModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalProjectTitle">Project Title</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="project-images">
+                    <div class="before-after">
+                        <div class="image-container">
+                            <h4>Before</h4>
+                            <div class="placeholder-image">📷</div>
+                        </div>
+                        <div class="image-container">
+                            <h4>After</h4>
+                            <div class="placeholder-image">📷</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-details">
+                    <p id="modalProjectDescription"></p>
+                    <div class="project-actions">
+                        <button class="btn btn--primary" onclick="showNotification('Thanks for the like!', 'success')">
+                            <i class="fas fa-heart"></i> Like
+                        </button>
+                        <button class="btn btn--secondary" onclick="showNotification('Comment feature coming soon!', 'info')">
+                            <i class="fas fa-comment"></i> Comment
+                        </button>
+                        <button class="btn btn--secondary" onclick="showNotification('Project shared!', 'success')">
+                            <i class="fas fa-share"></i> Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Video Player Modal with YouTube Integration -->
+    <div class="modal hidden" id="videoModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content video-modal-content">
+            <div class="modal-header">
+                <h3 id="videoModalTitle">Video Tutorial</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- YouTube video container will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div class="modal hidden" id="authModal">
+        <div class="modal-overlay" onclick="closeModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Sign In to Save Videos</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full-width">Sign In</button>
+                    <p class="auth-note">Don't have an account? <a href="#" onclick="showNotification('Sign up feature coming soon!', 'info')">Sign up here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
